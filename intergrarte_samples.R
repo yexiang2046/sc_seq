@@ -9,7 +9,7 @@ args = commandArgs(trailingOnly=TRUE)
 
 
 # test if there is at least two argument: if not, return an error
-if (length(args) > 1) {
+if (length(args) < 2) {
   stop("At least two arguments must be supplied (input file).n", call.=FALSE)
 } 
 
