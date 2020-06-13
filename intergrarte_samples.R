@@ -18,7 +18,7 @@ outfile = "integrated_seurat.rds"
 
 samples = list(length(args))
 samples_s = list(length(args))
-for i in seq_along(args){
+for (i in seq_along(args)){
 	samples[i] <- Read10x(data.dir = args[i], gene.column = 2, unique.features = TRUE)
 	samples_s[i] <- CreateSeuratObject(samples[i], project = "Lupus_CD4", min.cells = 3, min.features = 500)
 	samples_s[i] <- NormalizeData(samples_s[i], verbose = TRUE)
