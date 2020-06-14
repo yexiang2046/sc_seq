@@ -28,7 +28,7 @@ p1
 dev.off()
 
 
-tiff(paste0(outdir, "/treatment_umap_split.tiff")
+tiff(paste0(outdir, "/treatment_umap_split.tiff"))
 p2
 dev.off()
 
