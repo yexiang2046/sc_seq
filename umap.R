@@ -28,6 +28,7 @@ treatment <- colnames(sample)
 sam_id <- sapply(treatment, function(x){strsplit(x, "-")}[[1]][2])
 
 sample$treatment <- plyr::mapvalues(sam_id, 1:6, c("con_unsti", "con_sti_dmso", "con_sti_CB839", "SLE_unsti", "SLE_sit_dmso", "SLE_sit_CB839"))
+sample$treatment <- factor(sample$treatment, levels = c("con_unsti", "con_sti_dmso", "con_sti_CB839", "SLE_unsti", "SLE_sit_dmso", "SLE_sit_CB839"))
 
 saveRDS(sample, outfile)
 
