@@ -22,7 +22,7 @@ sample <- FindVariableFeatures(sample)
 
 
 p1 <- JackStrawPlot(sample, dims = 1:20)
-p2 <- ElbowPlot(sample)
+p2 <- ElbowPlot(sample, ndims = 50)
 
 p3 <- VariableFeaturePlot(sample)
 p3 <- LabelPoints(plot = p3, points = head(VariableFeatures(sample), 10))
