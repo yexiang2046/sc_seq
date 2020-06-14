@@ -21,7 +21,8 @@ sample <- readRDS(infile)
 sample <- ScaleData(sample, verbose = FALSE)
 
 sample <- RunPCA(sample, npcs = 50, seed.use = 42)
-
+sample <- JackStraw(sample, num.replicate = 100)
+sample <- ScoreJackStraw(sample, dims = 1:20)
 sample <- RunUMAP(sample, n.neighbors = 30L, dims = 1:30)
 
 treatment <- colnames(sample)
@@ -30,19 +31,17 @@ sam_id <- sapply(treatment, function(x){strsplit(x, "-")}[[1]][2])
 sample$treatment <- plyr::mapvalues(sam_id, 1:6, c("con_unsti", "con_sti_dmso", "con_sti_CB839", "SLE_unsti", "SLE_sit_dmso", "SLE_sit_CB839"))
 sample$treatment <- factor(sample$treatment, levels = c("con_unsti", "con_sti_dmso", "con_sti_CB839", "SLE_unsti", "SLE_sit_dmso", "SLE_sit_CB839"))
 
+sample <- FindNeighbors(sample, dims = 1:20)
+sample <- FindClusters(sample, resolution = 0.5)
+
 saveRDS(sample, outfile)
 
 
 
-dir.create("umap_plot")
 
 
-p1 <- DimPlot(sample, reduction = "umap", group.by = "treatment")
 
 
-tiff("umap_plot/treatment_umap.tiff")
-p1
-dev.off()
 
 
 

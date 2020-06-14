@@ -22,6 +22,7 @@ for (i in seq_along(args)){
 	samples[[i]] <- Read10X(data.dir = args[i], gene.column = 2, unique.features = TRUE)
 	colnames(samples[[i]]) <- paste0(colnames(samples[[i]]), "-", i)
 	samples_s[[i]] <- CreateSeuratObject(samples[[i]], project = "Lupus_CD4", min.cells = 3, min.features = 500)
+	samples_s[[i]][["percent.mt"]] <- PercentageFeatureSet(samples_s[[i]], pattern = "mt-")
 	samples_s[[i]] <- NormalizeData(samples_s[[i]], verbose = TRUE)
 	samples_s[[i]] <- FindVariableFeatures(samples_s[[i]], select.method = "vst", nfeatures = 2000, verbose = FALSE)
 }
