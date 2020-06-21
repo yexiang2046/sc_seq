@@ -31,6 +31,7 @@ p8 <- DimPlot(sample, reduction = "umap", group.by = "seurat_clusters", split.by
 
 p3 <- FeaturePlot(sample, reduction = "umap", features = genes)
 p4 <- VlnPlot(sample, genes, group.by = "treatment")
+p9 <- VlnPlot(sample, genes, group.by = "seurat_clusters")
 
 tiff("umap_plot/treatment_umap.tiff", width = 1200, height = 1200)
 p1
@@ -61,6 +62,10 @@ dev.off()
 tiff(paste0(outdir, "/umap_cluster_split.tiff"), width = 1200, height = 2000)
 p8
 dev.off()
+tiff(paste0(outdir, "/vln_marker_genes_split_cluster.tiff"), width = 4800, height = 2000)
+p9
+dev.off()
+
 
 
 
