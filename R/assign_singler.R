@@ -14,7 +14,15 @@ infile = args[1]
 outfile = args[2]
 
 
-
 sample <- readRDS(infile)
 
+
+mm.immu <- ImmGenData()
+
+log_counts <- sample@assays$integrated@data
+
+
+pred.mm.immu <- SingleR(test = log_counts, ref = mm.immu, labels = mm.immu$label.fine)
+
+saveRDS(pred.mm.immu, outfile)
 

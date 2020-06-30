@@ -24,7 +24,7 @@ sample <- readRDS(infile)
 p1 <- DimPlot(sample, reduction = "umap", group.by = "treatment") + geom_density_2d(aes(sample@reductions$umap@cell.embeddings[,1], sample@reductions$umap@cell.embeddings[,2]), stat = "density2d")
 p2 <- DimPlot(sample, reduction = "umap", group.by = "treatment", split.by = "treatment", ncol = 3) + geom_density_2d(aes(sample@reductions$umap@cell.embeddings[,1], sample@reductions$umap@cell.embeddings[,2]), stat = "density2d")
 p5 <- DimPlot(sample, reduction = "umap", group.by = "seurat_clusters", split.by = "treatment", ncol = 3) + geom_density_2d(aes(sample@reductions$umap@cell.embeddings[,1], sample@reductions$umap@cell.embeddings[,2]), stat = "density2d")
-p6 <- DimPlot(sample, reduction = "umap", group.by = "seurat_clusters") + geom_density_2d(aes(sample@reductions$umap@cell.embeddings[,1], sample@reductions$umap@cell.embeddings[,2]), stat = "density2d")
+p6 <- DimPlot(sample, reduction = "umap", group.by = "seurat_clusters", label = TRUE) + geom_density_2d(aes(sample@reductions$umap@cell.embeddings[,1], sample@reductions$umap@cell.embeddings[,2]), stat = "density2d")
 p7 <- DimPlot(sample, reduction = "umap", group.by = "seurat_clusters", split.by = "seurat_clusters", ncol = 3) + geom_density_2d(aes(sample@reductions$umap@cell.embeddings[,1], sample@reductions$umap@cell.embeddings[,2]), stat = "density2d")
 p8 <- DimPlot(sample, reduction = "umap", group.by = "seurat_clusters", split.by = "seurat_clusters", ncol = 3) 
 
