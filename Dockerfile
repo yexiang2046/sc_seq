@@ -19,6 +19,13 @@ RUN apt-get update && apt-get install -y \
     libproj-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Set working directory
+WORKDIR /workspace
+
+# Set environment variables
+ENV R_LIBS=/usr/local/lib/R/site-library
+ENV PATH=/usr/local/bin:$PATH
+
 # Install R packages with specific versions
 RUN R -e "install.packages('devtools', repos='https://cloud.r-project.org/')"
 RUN R -e "install.packages('BiocManager', repos='https://cloud.r-project.org/')"
@@ -27,13 +34,10 @@ RUN R -e "BiocManager::install(c('SingleCellExperiment', 'scater', 'scran', 'scR
 RUN R -e "install.packages(c('Matrix', 'Matrix.utils'), repos='https://cloud.r-project.org/')"
 RUN R -e "install.packages(c('tidyverse', 'ggplot2', 'dplyr', 'tidyr', 'hdf5r', 'SeuratObject', 'Seurat'), repos='https://cloud.r-project.org/')"
 
-# Set working directory
-WORKDIR /workspace
+# Create a non-root user and set permissions
+RUN useradd -m -s /bin/bash rstudio && \
+    chown -R rstudio:rstudio /workspace && \
+    chown -R rstudio:rstudio /usr/local/lib/R/site-library
 
-# Create a non-root user
-RUN useradd -m -s /bin/bash rstudio
 USER rstudio
 
-# Set environment variables
-ENV R_LIBS=/usr/local/lib/R/site-library
-ENV PATH=/usr/local/bin:$PATH
