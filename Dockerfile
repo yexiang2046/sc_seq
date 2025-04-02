@@ -30,6 +30,9 @@ RUN R -e "install.packages(c('tidyverse', 'ggplot2', 'dplyr', 'tidyr', 'hdf5r', 
 # Set working directory
 WORKDIR /workspace
 
+# Create a non-root user
+RUN useradd -m -s /bin/bash rstudio
+USER rstudio
 
 # Set environment variables
 ENV R_LIBS=/usr/local/lib/R/site-library
