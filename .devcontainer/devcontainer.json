@@ -1,0 +1,21 @@
+{
+    "name": "Single Cell Analysis",
+    "image": "xiang2019/scerenv:v1.0.1",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "REditorSupport.r",
+                "ms-python.python",
+                "ms-azuretools.vscode-docker"
+            ],
+            "settings": {
+                "r.rterm.linux": "/usr/local/bin/R",
+                "r.bracketedPaste": true,
+                "r.plot.useHttpgd": true
+            }
+        }
+    },
+    "forwardPorts": [8787],
+    "postCreateCommand": "R -e 'install.packages(\"languageserver\", repos=\"https://cloud.r-project.org\")'",
+    "remoteUser": "rstudio"
+} 
